@@ -10,7 +10,7 @@ class SphinxSearch
     protected $_total_count;
     protected $_time;
     protected $_eager_loads;
-	protected $_raw_mysql_connection;
+    protected $_raw_mysql_connection;
 
     public function __construct()
     {
