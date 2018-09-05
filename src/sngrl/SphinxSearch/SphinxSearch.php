@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace sngrl\SphinxSearch;
 
 class SphinxSearch
@@ -82,6 +82,11 @@ class SphinxSearch
     public function search($string, $index_name = null)
     {
         $this->_search_string = $string;
+
+        if(!$index_name) {
+            $index_name = implode(",", $this->getAllIndexes());
+        }
+
         if (null !== $index_name) {
             // if index name contains , or ' ', multiple index search
             if (strpos($index_name, ' ') || strpos($index_name, ',')) {
@@ -208,9 +213,9 @@ class SphinxSearch
                 $config = isset($this->_config['mapping']) ? $this->_config['mapping']
                     : $this->_config[$this->_index_name];
 
-		// Get the model primary key column name    
+		// Get the model primary key column name
 		$primaryKey = isset($config['primaryKey']) ? $config['primaryKey'] : 'id';
-		    
+
                 if ($config) {
                     if (isset($config['repository'])) {
                         $result = call_user_func_array($config['repository'] . '::findInRange',
@@ -298,6 +303,11 @@ class SphinxSearch
     public function escapeStringQL($string)
     {
         return $this->_connection->escapeString($string);
+    }
+
+    public function getAllIndexes()
+    {
+        return array_keys(\Config::get('sphinxsearch.indexes'));
     }
 
 }
