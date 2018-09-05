@@ -299,5 +299,10 @@ class SphinxSearch
     {
         return $this->_connection->escapeString($string);
     }
+	
+    public function getTime2()
+    {
+        return $this->_time;
+    }
 
 }
