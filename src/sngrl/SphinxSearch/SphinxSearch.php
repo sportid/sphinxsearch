@@ -83,10 +83,6 @@ class SphinxSearch
     {
         $this->_search_string = $string;
 
-        if(!$index_name) {
-            $index_name = implode(",", $this->getAllIndexes());
-        }
-
         if (null !== $index_name) {
             // if index name contains , or ' ', multiple index search
             if (strpos($index_name, ' ') || strpos($index_name, ',')) {
@@ -304,10 +300,4 @@ class SphinxSearch
     {
         return $this->_connection->escapeString($string);
     }
-
-    public function getAllIndexes()
-    {
-        return array_keys(\Config::get('sphinxsearch.indexes'));
-    }
-
 }
