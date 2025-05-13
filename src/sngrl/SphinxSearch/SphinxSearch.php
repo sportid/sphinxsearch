@@ -29,6 +29,7 @@ class SphinxSearch
         reset($this->_config);
         $this->_index_name = isset($this->_config['name']) ? implode(',', $this->_config['name']) : key($this->_config);
         $this->_eager_loads = array();
+        $this->_search_string = '';
     }
 
 	/**
